@@ -5,7 +5,7 @@
 ICGLWidgit::ICGLWidgit( QWidget* parent )
     :QGLWidget(parent)
 {
-
+    setGeometry(0, 0, parent->width(),parent->height());
 }
 
 ICGLWidgit::~ICGLWidgit()
@@ -29,25 +29,34 @@ void ICGLWidgit::paintGL()
     glLoadIdentity();   //重置当前的模型观察矩阵。
 
     //坐标转移
-    glTranslatef(0.0f,0.0f,-1.0f);
+    glTranslatef(-1.5f, 0.0f, -6.0f);
+    //设置颜色
+    glColor3f( 0.5, 1.0, 1.0 );
+    //绘制一个正方形
+    glBegin( GL_TRIANGLES );
+    glVertex3f( -1.0,  1.0,  0.0 );
+    glVertex3f(  1.0,  1.0,  0.0 );
+    glVertex3f(  1.0, -1.0,  0.0 );
+    glEnd();
+
+    //坐标转移
+    glTranslatef(3.0f, 0.0f, 0.0f);
     //设置颜色
     glColor3f( 1.0, 1.0, 1.0 );
     //绘制一个正方形
-    glBegin( GL_QUADS );
-    glVertex3f( -0.5,  0.5,  0.0 );
-    glVertex3f(  0.5,  0.5,  0.0 );
-    glVertex3f(  0.5, -0.5,  0.0 );
-    glVertex3f( -0.5, -0.5,  0.0 );
+    glBegin( GL_TRIANGLES );
+    glVertex3f( -1.0,  1.0,  0.0 );
+    glVertex3f(  1.0,  1.0,  0.0 );
+    glVertex3f(  1.0, -1.0,  0.0 );
     glEnd();
 }
 
 void ICGLWidgit::resizeGL( int w, int h )
 {
-    if ( h == 0 )   //防止 height 为 0
+    if ( h == 0 )   //防止 h 为 0
     {
         h = 1;
     }
-
     glViewport( 0, 0, (GLint)w, (GLint)h );    //重置当前的视口(Viewport)
 
     glMatrixMode( GL_PROJECTION );  //选择投影矩阵。

@@ -38,3 +38,6 @@ win32-g++ {
 win32-msvc*{
     LIBS += opengl32.lib glu32.lib
 }
+unix{
+    LIBS += -lglut -lGLU
+}
